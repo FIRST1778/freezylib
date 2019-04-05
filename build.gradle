@@ -1,0 +1,39 @@
+plugins {
+  id 'java-library'
+  id 'checkstyle'
+  id 'com.diffplug.gradle.spotless'version'3.21.1'
+  id 'net.ltgt.errorprone'version'0.7.1'
+  id 'com.github.ben-manes.versions'version'0.21.0'
+}
+
+repositories { jcenter() }
+
+dependencies {
+  errorprone('com.google.errorprone:error_prone_core:2.3.3')
+
+  implementation 'com.google.guava:guava:27.1-jre'
+
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0-M1'
+  testImplementation 'org.assertj:assertj-core:3.12.2'
+}
+
+compileJava { dependsOn 'spotlessApply' }
+
+test {
+  useJUnitPlatform { excludeTags 'slow' }
+  testLogging.showStandardStreams = true
+}
+
+spotless {
+  java { googleJavaFormat() }
+  groovyGradle {
+    greclipse()
+    indentWithSpaces(2)
+  }
+}
+
+checkstyle {
+  toolVersion = '8.19'
+  config = rootProject.resources.text.fromFile('config/checkstyle/checkstyle.xml')
+  configProperties = ['suppressionFile':project(':').file('config/checkstyle/suppressions.xml')]
+}
