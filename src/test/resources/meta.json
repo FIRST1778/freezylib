@@ -1,0 +1,18 @@
+[
+  {
+    "value": "meta",
+    "name": "MetaField",
+    "unit": "ul",
+    "type": "java.lang.String"
+  },
+  {
+    "name": "PolledField",
+    "unit": "in",
+    "type": "java.lang.String"
+  },
+  {
+    "name": "SubscribedField",
+    "unit": "°",
+    "type": "java.lang.String"
+  }
+]
