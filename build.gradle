@@ -1,17 +1,24 @@
 plugins {
   id 'java-library'
+  id 'edu.wpi.first.GradleRIO' version '2019.4.1'
   id 'checkstyle'
-  id 'com.diffplug.gradle.spotless'version'3.21.1'
-  id 'net.ltgt.errorprone'version'0.7.1'
-  id 'com.github.ben-manes.versions'version'0.21.0'
+  id 'com.diffplug.gradle.spotless' version '3.22.0'
+  id 'net.ltgt.errorprone' version '0.8'
+  id 'com.github.ben-manes.versions' version '0.21.0'
 }
 
-repositories { jcenter() }
+repositories { mavenCentral() }
 
 dependencies {
   errorprone('com.google.errorprone:error_prone_core:2.3.3')
 
+  implementation wpi.deps.wpilib()
+  implementation wpi.deps.vendor.java()
+  nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
+  nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+
   implementation 'com.google.guava:guava:27.1-jre'
+  implementation 'com.google.code.gson:gson:2.8.5'
 
   testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0-M1'
   testImplementation 'org.assertj:assertj-core:3.12.2'
@@ -25,7 +32,7 @@ test {
 }
 
 spotless {
-  java { googleJavaFormat() }
+  java { googleJavaFormat('1.7') }
   groovyGradle {
     greclipse()
     indentWithSpaces(2)
@@ -35,5 +42,5 @@ spotless {
 checkstyle {
   toolVersion = '8.19'
   config = rootProject.resources.text.fromFile('config/checkstyle/checkstyle.xml')
-  configProperties = ['suppressionFile':project(':').file('config/checkstyle/suppressions.xml')]
+  configProperties = [ 'suppressionFile': project(':').file('config/checkstyle/suppressions.xml') ]
 }
