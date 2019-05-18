@@ -3,18 +3,14 @@ package org.frc1778.freezylib.logging;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import edu.wpi.first.wpilibj.DriverStation.MatchType;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Writer;
-import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -34,6 +30,8 @@ public class FreezyLog {
   private static String pathToLogDirectory = "/home/lvuser/logs/";
   private static File csvFile;
   private static File jsonFile;
+
+  private static boolean filesDirty;
 
   private static Gson gson =
       new GsonBuilder()
@@ -59,6 +57,8 @@ public class FreezyLog {
     } catch (IOException e) {
       System.err.println(e.getMessage());
     }
+
+    filesDirty = true;
   }
 
   public static void setLogFileName(String name) throws Exception {
@@ -72,6 +72,8 @@ public class FreezyLog {
     } else {
       csvFileName = name;
     }
+
+    filesDirty = true;
   }
 
   public static void setMetaFileName(String name) throws Exception {
@@ -85,6 +87,8 @@ public class FreezyLog {
     } else {
       jsonFileName = name;
     }
+
+    filesDirty = true;
   }
 
   public static File getJsonFile() {
@@ -97,6 +101,20 @@ public class FreezyLog {
 
   public static void addField(Field field) {
     fields.add(field);
+
+    filesDirty = true;
+  }
+
+  public static void removeField(Field field) {
+    fields.remove(field);
+
+    filesDirty = true;
+  }
+
+  public static void dump() {
+    fields.clear();
+
+    filesDirty = true;
   }
 
   public static void pollFields() {
@@ -130,33 +148,24 @@ public class FreezyLog {
 
   public static void log() {
     pollFields();
+
     try {
-      boolean clearCsv = false;
-      if (csvFile.exists()) {
-        try (BufferedReader csvReader =
-            new BufferedReader(new FileReader(csvFile, Charset.defaultCharset()))) {
-          if (!getCsvHeader().equals(csvReader.readLine())) {
-            clearCsv = true;
-          }
+      String csvOut = "";
+      if (filesDirty) {
+        csvFile.delete();
+        csvOut += getCsvHeader() + "\n";
+
+        try (Writer writer = new FileWriter(jsonFile, Charset.defaultCharset(), false)) {
+          gson.toJson(fields, writer);
         }
-      } else {
-        clearCsv = true;
+
+        filesDirty = false;
       }
+      csvOut += getCollectedFields() + "\n";
 
       try (PrintWriter csvWriter =
           new PrintWriter(new FileWriter(csvFile, Charset.defaultCharset(), true))) {
-        if (clearCsv) {
-          if (csvFile.exists()) {
-            FileChannel.open(csvFile.toPath(), StandardOpenOption.WRITE).truncate(0).close();
-          }
-          csvWriter.write(getCsvHeader() + "\n");
-
-          try (Writer writer = new FileWriter(jsonFile, Charset.defaultCharset(), false)) {
-            gson.toJson(fields, writer);
-          }
-        }
-
-        csvWriter.print(getCollectedFields() + "\n");
+        csvWriter.write(csvOut);
       }
     } catch (IOException e) {
       System.err.println(e.getMessage());
