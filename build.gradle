@@ -50,3 +50,23 @@ checkstyle {
   config = rootProject.resources.text.fromFile('config/checkstyle/checkstyle.xml')
   configProperties = [ 'suppressionFile': project(':').file('config/checkstyle/suppressions.xml') ]
 }
+
+task sourceJar(type: Jar) {
+  from sourceSets.main.allJava
+  archiveClassifier = 'sources'
+}
+
+task javadocJar(type: Jar) {
+  from javadoc
+  archiveClassifier = 'javadoc'
+}
+
+publishing {
+  publications {
+    freezylib(MavenPublication) {
+      from components.java
+      artifact sourceJar
+      artifact javadocJar
+    }
+  }
+}
