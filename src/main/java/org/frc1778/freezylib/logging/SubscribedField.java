@@ -1,5 +1,7 @@
 package org.frc1778.freezylib.logging;
 
+import org.frc1778.freezylib.util.Measurement.UnitBase;
+
 public class SubscribedField extends Field {
 
   private String value;
@@ -11,8 +13,8 @@ public class SubscribedField extends Field {
     setType(type);
   }
 
-  public SubscribedField(String name, Units unit, Class<?> type) {
-    this(name, unit.toString(), type);
+  public SubscribedField(String name, UnitBase unit, Class<?> type) {
+    this(name, unit.getSymbol(), type);
   }
 
   public <T> void pushValue(T value) {

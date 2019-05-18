@@ -1,6 +1,7 @@
 package org.frc1778.freezylib.logging;
 
 import com.google.gson.annotations.Expose;
+import org.frc1778.freezylib.util.Measurement.UnitBase;
 
 public class MetaField extends Field {
 
@@ -13,8 +14,8 @@ public class MetaField extends Field {
     setType(((Object) value).getClass());
   }
 
-  public <T> MetaField(String name, Units unit, T value) {
-    this(name, unit.toString(), value);
+  public <T> MetaField(String name, UnitBase unit, T value) {
+    this(name, unit.getSymbol(), value);
   }
 
   @Override
