@@ -4,7 +4,7 @@ plugins {
   id 'java-library'
 
   id 'checkstyle'
-  id 'com.diffplug.gradle.spotless' version '3.22.0'
+  id 'com.diffplug.gradle.spotless' version '3.23.0'
   id 'net.ltgt.errorprone' version '0.8'
   id 'com.github.ben-manes.versions' version '0.21.0'
 
@@ -15,7 +15,7 @@ group = 'com.github.HillelCoates'
 
 repositories {
   mavenCentral()
-  maven { setUrl("https://maven.woke.engineer/") }
+  maven { url 'https://maven.woke.engineer/' }
 }
 
 dependencies {
