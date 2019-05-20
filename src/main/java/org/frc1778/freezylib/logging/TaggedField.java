@@ -1,6 +1,6 @@
 package org.frc1778.freezylib.logging;
 
-import org.frc1778.freezylib.util.Measurement.UnitBase;
+import org.frc1778.freezylib.util.Measurement;
 
 public class TaggedField extends Field {
 
@@ -14,7 +14,7 @@ public class TaggedField extends Field {
     setType(type);
   }
 
-  public TaggedField(String name, UnitBase unit, Class<?> type) {
+  public TaggedField(String name, Measurement.Base unit, Class<?> type) {
     this(name, unit.getSymbol(), type);
   }
 

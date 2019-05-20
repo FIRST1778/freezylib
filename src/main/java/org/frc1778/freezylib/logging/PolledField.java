@@ -1,7 +1,7 @@
 package org.frc1778.freezylib.logging;
 
 import java.util.function.Supplier;
-import org.frc1778.freezylib.util.Measurement.UnitBase;
+import org.frc1778.freezylib.util.Measurement;
 
 public class PolledField extends Field {
 
@@ -15,7 +15,7 @@ public class PolledField extends Field {
     this.supplier = () -> String.valueOf(supplier.get());
   }
 
-  public <T> PolledField(String name, UnitBase unit, Supplier<T> supplier) {
+  public <T> PolledField(String name, Measurement.Base unit, Supplier<T> supplier) {
     this(name, unit.getSymbol(), supplier);
   }
 

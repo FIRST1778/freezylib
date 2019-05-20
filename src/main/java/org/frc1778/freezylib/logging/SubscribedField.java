@@ -1,6 +1,6 @@
 package org.frc1778.freezylib.logging;
 
-import org.frc1778.freezylib.util.Measurement.UnitBase;
+import org.frc1778.freezylib.util.Measurement;
 
 public class SubscribedField extends Field {
 
@@ -13,7 +13,7 @@ public class SubscribedField extends Field {
     setType(type);
   }
 
-  public SubscribedField(String name, UnitBase unit, Class<?> type) {
+  public SubscribedField(String name, Measurement.Base unit, Class<?> type) {
     this(name, unit.getSymbol(), type);
   }
 
