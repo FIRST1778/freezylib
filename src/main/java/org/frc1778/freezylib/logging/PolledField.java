@@ -5,8 +5,8 @@ import org.frc1778.freezylib.util.Measurement;
 
 public class PolledField extends Field {
 
-  private Supplier<String> supplier;
-  private String value;
+  private final Supplier<String> supplier;
+  private transient String value;
 
   public <T> PolledField(String name, String unit, Supplier<T> supplier) {
     setName(name);
@@ -21,6 +21,10 @@ public class PolledField extends Field {
 
   public void pollSupplier() {
     value = supplier.get();
+  }
+
+  public Supplier<String> getSupplier() {
+    return supplier;
   }
 
   @Override

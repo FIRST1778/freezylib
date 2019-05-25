@@ -4,7 +4,7 @@ import org.frc1778.freezylib.util.Measurement;
 
 public class SubscribedField extends Field {
 
-  private String value;
+  private transient String value;
 
   public SubscribedField(String name, String unit, Class<?> type) {
     setName(name);

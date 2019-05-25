@@ -30,18 +30,13 @@ public class FreezyLogTest {
 
   @Test
   public void providingAnInvalidFileNameShouldThrowException() {
-    String goodMetaFile = "/meta.json";
-    String badMetaFile = "/meta.notjson";
-    String goodLogFile = "/log.csv";
-    String badLogFile = "/log.notcsv";
+    assertThatExceptionOfType(Exception.class)
+        .isThrownBy(() -> FreezyLog.setMetaFileName("/meta.notjson"));
+    assertThatCode(() -> FreezyLog.setMetaFileName("/meta.json")).doesNotThrowAnyException();
 
     assertThatExceptionOfType(Exception.class)
-        .isThrownBy(() -> FreezyLog.setMetaFileName(badMetaFile));
-    assertThatCode(() -> FreezyLog.setMetaFileName(goodMetaFile)).doesNotThrowAnyException();
-
-    assertThatExceptionOfType(Exception.class)
-        .isThrownBy(() -> FreezyLog.setLogFileName(badLogFile));
-    assertThatCode(() -> FreezyLog.setLogFileName(goodLogFile)).doesNotThrowAnyException();
+        .isThrownBy(() -> FreezyLog.setLogFileName("/log.notcsv"));
+    assertThatCode(() -> FreezyLog.setLogFileName("/log.csv")).doesNotThrowAnyException();
   }
 
   @Test
@@ -58,32 +53,31 @@ public class FreezyLogTest {
     FreezyLog.log();
 
     try {
-      assertThat(
-              Files.asCharSource(FreezyLog.getCsvFile(), Charset.forName("UTF-8"))
-                  .read()
-                  .replaceAll("\\r\\n", "\n")
-                  .replaceAll("\\r", "\n"))
+      assertThat(readFileAsCharSource(FreezyLog.getLogFile()))
           .isEqualTo(
-              Files.asCharSource(
-                      new File(getClass().getClassLoader().getResource("log.csv").getFile()),
-                      Charset.forName("UTF-8"))
-                  .read()
-                  .replaceAll("\\r\\n", "\n")
-                  .replaceAll("\\r", "\n"));
-      assertThat(
-              Files.asCharSource(FreezyLog.getJsonFile(), Charset.forName("UTF-8"))
-                  .read()
-                  .replaceAll("\\r\\n", "\n")
-                  .replaceAll("\\r", "\n"))
+              readFileAsCharSource(
+                  new File(
+                      Thread.currentThread()
+                          .getContextClassLoader()
+                          .getResource("log.csv")
+                          .getFile())));
+      assertThat(readFileAsCharSource(FreezyLog.getMetaFile()))
           .isEqualTo(
-              Files.asCharSource(
-                      new File(getClass().getClassLoader().getResource("meta.json").getFile()),
-                      Charset.forName("UTF-8"))
-                  .read()
-                  .replaceAll("\\r\\n", "\n")
-                  .replaceAll("\\r", "\n"));
+              readFileAsCharSource(
+                  new File(
+                      Thread.currentThread()
+                          .getContextClassLoader()
+                          .getResource("meta.json")
+                          .getFile())));
     } catch (IOException e) {
       fail(e.getMessage());
     }
+  }
+
+  private String readFileAsCharSource(File file) throws IOException {
+    return Files.asCharSource(file, Charset.forName("UTF-8"))
+        .read()
+        .replaceAll("\\r\\n", "\n")
+        .replaceAll("\\r", "\n");
   }
 }

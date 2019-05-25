@@ -13,6 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
@@ -48,7 +49,7 @@ public class FreezyLog {
     Path path =
         Path.of(
             pathToLogDirectory,
-            matchType.name().toLowerCase(),
+            matchType.name().toLowerCase(Locale.ENGLISH),
             "match" + String.format("%02d", matchNumber));
     try {
       Files.createDirectories(path);
@@ -91,11 +92,11 @@ public class FreezyLog {
     filesDirty = true;
   }
 
-  public static File getJsonFile() {
+  public static File getMetaFile() {
     return jsonFile;
   }
 
-  public static File getCsvFile() {
+  public static File getLogFile() {
     return csvFile;
   }
 

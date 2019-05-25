@@ -875,11 +875,15 @@ public class Measurement {
   }
 
   private double value;
-  private Base unit;
+  private final Base unit;
 
   public Measurement(double value, Base unit) {
     this.value = value;
     this.unit = unit;
+  }
+
+  public double setValue() {
+    return value;
   }
 
   public double getValue() {

@@ -5,7 +5,7 @@ import org.frc1778.freezylib.util.Measurement;
 
 public class MetaField extends Field {
 
-  @Expose private String value;
+  @Expose private final String value;
 
   public <T> MetaField(String name, String unit, T value) {
     setName(name);

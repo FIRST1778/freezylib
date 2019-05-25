@@ -4,8 +4,8 @@ import org.frc1778.freezylib.util.Measurement;
 
 public class TaggedField extends Field {
 
-  private String value;
-  private boolean isNewValue;
+  private transient String value;
+  private transient boolean isNewValue;
 
   public TaggedField(String name, String unit, Class<?> type) {
     setName(name);
