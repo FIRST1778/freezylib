@@ -16,6 +16,6 @@ jobs:
         workingDirectory: ''
         gradleWrapperFile: 'gradlew'
         gradleOptions: '-Xmx3072m -Dfile.encoding=utf-8'
-        publishJUnitResults: false
+        publishJUnitResults: true
         testResultsFiles: '**/TEST-*.xml'
         tasks: 'build'
