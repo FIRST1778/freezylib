@@ -4,8 +4,8 @@ plugins {
   id 'java-library'
 
   id 'checkstyle'
-  id 'com.diffplug.gradle.spotless' version '3.23.0'
-  id 'net.ltgt.errorprone' version '0.8'
+  id 'com.diffplug.gradle.spotless' version '3.24.0'
+  id 'net.ltgt.errorprone' version '0.8.1'
   id 'pmd'
   id 'com.github.ben-manes.versions' version '0.21.0'
 
@@ -24,11 +24,11 @@ dependencies {
   nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
   nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
 
-  implementation 'com.google.guava:guava:27.1-jre'
+  implementation 'com.google.guava:guava:28.0-jre'
   implementation 'com.google.code.gson:gson:2.8.5'
 
-  testImplementation 'org.junit.jupiter:junit-jupiter:5.5.0-M1'
-  testImplementation 'org.assertj:assertj-core:3.12.2'
+  testImplementation 'org.junit.jupiter:junit-jupiter:5.5.1'
+  testImplementation 'org.assertj:assertj-core:3.13.1'
 }
 
 compileJava { dependsOn 'spotlessApply' }
@@ -44,6 +44,18 @@ spotless {
     greclipse()
     indentWithSpaces(2)
   }
+}
+
+task getLogs(type:Exec) {
+  workingDir '../tomcat/bin'
+
+  //on windows:
+  commandLine 'cmd', '/c', 'scp -4 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p lvuser@roborio-', {}, '-frc.local:/home/lvuser/log-*.txt', 'logs/'
+
+  commandLine './stop.sh'
+
+  standardOutput = new ByteArrayOutputStream()
+  ext.output = { return standardOutput.toString() }
 }
 
 checkstyle {
