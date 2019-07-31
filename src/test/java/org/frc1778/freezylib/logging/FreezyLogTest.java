@@ -45,11 +45,11 @@ public class FreezyLogTest {
     FreezyLog.populateMatchStructure(MatchType.Qualification, 0);
     FreezyLog.addField(new MetaField("MetaField", "ul", "meta"));
     FreezyLog.addField(new PolledField("PolledField", Measurement.Length.INCHES, () -> "polled"));
-    SubscribedField subscribedField =
+    var subscribedField =
         new SubscribedField("SubscribedField", Measurement.Angle.DEGREES, String.class);
     FreezyLog.addField(subscribedField);
-
     subscribedField.pushValue("subscribed");
+
     FreezyLog.log();
 
     try {

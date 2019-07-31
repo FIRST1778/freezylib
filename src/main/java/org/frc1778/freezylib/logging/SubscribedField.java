@@ -4,12 +4,11 @@ import org.frc1778.freezylib.util.Measurement;
 
 public class SubscribedField extends Field {
 
-  private transient String value;
+  private transient String value = "";
 
   public SubscribedField(String name, String unit, Class<?> type) {
     setName(name);
     setUnit(unit);
-    this.value = String.valueOf(value);
     setType(type);
   }
 

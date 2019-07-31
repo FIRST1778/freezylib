@@ -25,7 +25,7 @@ public class TaggedField extends Field {
 
   @Override
   public String getValue() {
-    String out = isNewValue ? value : "";
+    var out = isNewValue ? value : "";
     isNewValue = false;
     return out;
   }

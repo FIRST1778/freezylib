@@ -28,11 +28,11 @@ public class FreezyLog {
   private static String csvFileName = "log.csv";
   private static String jsonFileName = "meta.json";
 
-  private static String pathToLogDirectory = "/home/lvuser/logs/";
+  private static String pathToLogDirectory = "/home/lvuser/logs";
   private static File csvFile;
   private static File jsonFile;
 
-  private static boolean filesDirty;
+  private static boolean filesDirty = true;
 
   private static Gson gson =
       new GsonBuilder()
@@ -46,7 +46,7 @@ public class FreezyLog {
   }
 
   public static void populateMatchStructure(MatchType matchType, int matchNumber) {
-    Path path =
+    var path =
         Path.of(
             pathToLogDirectory,
             matchType.name().toLowerCase(Locale.ENGLISH),
@@ -63,7 +63,7 @@ public class FreezyLog {
   }
 
   public static void setLogFileName(String name) throws Exception {
-    int i = name.lastIndexOf('.');
+    var i = name.lastIndexOf('.');
 
     if (!new String(i > 0 ? name.substring(i + 1) : "").equals("csv")) {
       throw new Exception(
@@ -78,7 +78,7 @@ public class FreezyLog {
   }
 
   public static void setMetaFileName(String name) throws Exception {
-    int i = name.lastIndexOf('.');
+    var i = name.lastIndexOf('.');
 
     if (!new String(i > 0 ? name.substring(i + 1) : "").equals("json")) {
       throw new Exception(
@@ -151,7 +151,7 @@ public class FreezyLog {
     pollFields();
 
     try {
-      String csvOut = "";
+      var csvOut = "";
       if (filesDirty) {
         csvFile.delete();
         csvOut += getCsvHeader() + "\n";
@@ -162,11 +162,15 @@ public class FreezyLog {
 
         filesDirty = false;
       }
-      csvOut += getCollectedFields() + "\n";
 
-      try (PrintWriter csvWriter =
-          new PrintWriter(new FileWriter(csvFile, Charset.forName("UTF-8"), true))) {
-        csvWriter.write(csvOut);
+      var collectedFields = getCollectedFields();
+      csvOut += collectedFields.replaceAll(",", "").length() > 0 ? collectedFields : "";
+
+      if (csvOut.length() > 0) {
+        try (PrintWriter csvWriter =
+            new PrintWriter(new FileWriter(csvFile, Charset.forName("UTF-8"), true))) {
+          csvWriter.write(csvOut + "\n");
+        }
       }
     } catch (IOException e) {
       System.err.println(e.getMessage());

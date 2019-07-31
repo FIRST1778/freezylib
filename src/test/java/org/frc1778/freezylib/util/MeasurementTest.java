@@ -10,15 +10,15 @@ public class MeasurementTest {
 
   @Test
   public void testConversion() {
-    Measurement kilometer = new Measurement(1.5, Measurement.Length.KILOMETERS);
+    var kilometer = new Measurement(1.5, Measurement.Length.KILOMETERS);
     assertThat(kilometer.convertTo(Measurement.Length.INCHES).getValue())
         .isEqualTo(59055.118110236224, Offset.offset(1e-9));
 
-    Measurement fahrenheit = new Measurement(212, Measurement.Temperature.DEGREE_FAHRENHEIT);
+    var fahrenheit = new Measurement(212, Measurement.Temperature.DEGREE_FAHRENHEIT);
     assertThat(fahrenheit.convertTo(Measurement.Temperature.DEGREE_CELSIUS).getValue())
         .isEqualTo(100.0, Offset.offset(1e-9));
 
-    Measurement pounds = new Measurement(1.5, Measurement.Mass.POUNDS);
+    var pounds = new Measurement(1.5, Measurement.Mass.POUNDS);
     assertThat(pounds.convertTo(Measurement.Mass.GRAMS).getValue())
         .isEqualTo(680.3885564999999, Offset.offset(1e-9));
   }
