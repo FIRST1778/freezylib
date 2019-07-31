@@ -156,7 +156,7 @@ public class FreezyLog {
         csvFile.delete();
         csvOut += getCsvHeader() + "\n";
 
-        try (Writer writer = new FileWriter(jsonFile, Charset.defaultCharset(), false)) {
+        try (Writer writer = new FileWriter(jsonFile, Charset.forName("UTF-8"), false)) {
           gson.toJson(fields, writer);
         }
 
@@ -165,7 +165,7 @@ public class FreezyLog {
       csvOut += getCollectedFields() + "\n";
 
       try (PrintWriter csvWriter =
-          new PrintWriter(new FileWriter(csvFile, Charset.defaultCharset(), true))) {
+          new PrintWriter(new FileWriter(csvFile, Charset.forName("UTF-8"), true))) {
         csvWriter.write(csvOut);
       }
     } catch (IOException e) {

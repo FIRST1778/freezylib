@@ -18,7 +18,7 @@ public class Measurement {
   }
 
   public enum Acceleration implements Base {
-    METERS_PER_SECOND_SQUARED("m/s²", 1.0, 0.0),
+    METERS_PER_SECOND_SQUARED("m/s\u00B2", 1.0, 0.0),
     GRAVITY("g", 9.80665, 0.0);
 
     private final String symbol;
@@ -53,9 +53,9 @@ public class Measurement {
   }
 
   public enum Angle implements Base {
-    DEGREES("°", 1.0, 0),
-    ARC_MINUTES("ʹ", 1.0 / 60, 0),
-    ARC_SECONDS("ʺ", 1.0 / 3600, 0),
+    DEGREES("\u00B0", 1.0, 0),
+    ARC_MINUTES("\u02B9", 1.0 / 60, 0),
+    ARC_SECONDS("\u02BA", 1.0 / 3600, 0),
     RADIANS("rad", 180.0 / Math.PI, 0),
     GRADIANS("grad", 0.9, 0),
     REVOLUTIONS("rev", 360, 0);
@@ -92,17 +92,17 @@ public class Measurement {
   }
 
   public enum Area implements Base {
-    SQUARE_MEGAMETERS("Mm²", 1e+12, 0.0),
-    SQUARE_KILOMETERS("km²", 1e+6, 0.0),
-    SQUARE_METERS("m²", 1.0, 0.0),
-    SQUARE_CENTIMETER("cm²", 1e-4, 0.0),
-    SQUARE_MILLIMETERS("mm²", 1e-6, 0.0),
-    SQUARE_MICROMETERS("µm²", 1e-12, 0.0),
-    SQUARE_NANOMETERS("nm²", 1e-18, 0.0),
-    SQUARE_INCHES("in²", 0.00064516, 0.0),
-    SQUARE_FEET("ft²", 0.09290304, 0.0),
-    SQUARE_YARDS("yd²", 0.83612736, 0.0),
-    SQUARE_MILES("mi²", 2589988.11, 0.0),
+    SQUARE_MEGAMETERS("Mm\u00B2", 1e+12, 0.0),
+    SQUARE_KILOMETERS("km\u00B2", 1e+6, 0.0),
+    SQUARE_METERS("m\u00B2", 1.0, 0.0),
+    SQUARE_CENTIMETER("cm\u00B2", 1e-4, 0.0),
+    SQUARE_MILLIMETERS("mm\u00B2", 1e-6, 0.0),
+    SQUARE_MICROMETERS("\u00B5m\u00B2", 1e-12, 0.0),
+    SQUARE_NANOMETERS("nm\u00B2", 1e-18, 0.0),
+    SQUARE_INCHES("in\u00B2", 0.00064516, 0.0),
+    SQUARE_FEET("ft\u00B2", 0.09290304, 0.0),
+    SQUARE_YARDS("yd\u00B2", 0.83612736, 0.0),
+    SQUARE_MILES("mi\u00B2", 2589988.11, 0.0),
     ACRES("ac", 4046.85642, 0.0),
     ARES("a", 100, 0.0),
     HECTARES("ha", 10000, 0.0);
@@ -208,7 +208,7 @@ public class Measurement {
   }
 
   public enum Duration implements Base {
-    MICROSECONDS("µs", 1e-6, 0.0),
+    MICROSECONDS("\u00B5s", 1e-6, 0.0),
     MILLISECONDS("ms", 1e-3, 0.0),
     SECONDS("s", 1, 0.0),
     MINUTES("min", 60, 0.0),
@@ -251,7 +251,7 @@ public class Measurement {
     KILOAMPERE_HOURS("kAh", 3.6e+6, 0.0),
     AMPERE_HOURS("Ah", 3.6e+3, 0.0),
     MILLIAMPERE_HOURS("mAh", 3.6, 0.0),
-    MICROAMPERE_HOURS("µAh", 3.6e-3, 0.0);
+    MICROAMPERE_HOURS("\u00B5Ah", 3.6e-3, 0.0);
 
     private final String symbol;
     private final double coefficient;
@@ -289,7 +289,7 @@ public class Measurement {
     KILOAMPERES("kA", 1e+3, 0.0),
     AMPERES("A", 1.0, 0.0),
     MILLIAMPERES("mA", 1e-3, 0.0),
-    MICROAMPERES("µA", 1e-6, 0.0);
+    MICROAMPERES("\u00B5A", 1e-6, 0.0);
 
     private final String symbol;
     private final double coefficient;
@@ -327,7 +327,7 @@ public class Measurement {
     KILOVOLTS("kV", 1e+3, 0.0),
     VOLTS("V", 1.0, 0.0),
     MILLIVOLTS("mV", 1e-3, 0.0),
-    MICROVOLTS("µV", 1e-6, 0.0);
+    MICROVOLTS("\u00B5V", 1e-6, 0.0);
 
     private final String symbol;
     private final double coefficient;
@@ -361,11 +361,11 @@ public class Measurement {
   }
 
   public enum ElectricResistance implements Base {
-    MEGAOHMS("MΩ", 1e+6, 0.0),
-    KILOOHMS("kΩ", 1e+3, 0.0),
-    OHMS("Ω", 1.0, 0.0),
-    MILLIOHMS("mΩ", 1e-3, 0.0),
-    MICROOHMS("µΩ", 1e-6, 0.0);
+    MEGAOHMS("M\u2126", 1e+6, 0.0),
+    KILOOHMS("k\u2126", 1e+3, 0.0),
+    OHMS("\u2126", 1.0, 0.0),
+    MILLIOHMS("m\u2126", 1e-3, 0.0),
+    MICROOHMS("\u00B5\u2126", 1e-6, 0.0);
 
     private final String symbol;
     private final double coefficient;
@@ -443,7 +443,7 @@ public class Measurement {
     KILOHERTZ("kHz", 1e+3, 0.0),
     HERTZ("Hz", 1.0, 0.0),
     MILLIHERTZ("mHz", 1e-3, 0.0),
-    MICROHERTZ("µHz", 1e-6, 0.0),
+    MICROHERTZ("\u00B5Hz", 1e-6, 0.0),
     NANOHERTZ("nHz", 1e-9, 0.0);
 
     private final String symbol;
@@ -556,7 +556,7 @@ public class Measurement {
     DECIMETERS("dm", 1e-1, 0.0),
     CENTIMETERS("cm", 1e-2, 0.0),
     MILLIMETERS("mm", 1e-3, 0.0),
-    MICROMETERS("µm", 1e-6, 0.0),
+    MICROMETERS("\u00B5m", 1e-6, 0.0),
     NANOMETERS("nm", 1e-9, 0.0),
     PICOMETERS("pm", 1e-12, 0.0),
     INCHES("in", 0.0254, 0.0),
@@ -608,7 +608,7 @@ public class Measurement {
     DECIGRAMS("dg", 1e-4, 0.0),
     CENTIGRAMS("cg", 1e-5, 0.0),
     MILLIGRAMS("mg", 1e-6, 0.0),
-    MICROGRAMS("µg", 1e-9, 0.0),
+    MICROGRAMS("\u00B5g", 1e-9, 0.0),
     NANOGRAMS("ng", 1e-12, 0.0),
     PICOGRAMS("pg", 1e-15, 0.0),
     OUNCES("oz", 0.0283495232, 0.0),
@@ -658,7 +658,7 @@ public class Measurement {
     KILOWATTS("kW", 1e+3, 0.0),
     WATTS("W", 1.0, 0.0),
     MILLIWATTS("mW", 1e-3, 0.0),
-    MICROWATTS("µW", 1e-6, 0.0),
+    MICROWATTS("\u00B5W", 1e-6, 0.0),
     NANOWATTS("nW", 1e-9, 0.0),
     PICOWATTS("pW", 1e-12, 0.0),
     FEMTOWATTS("fW", 1e-15, 0.0),
@@ -696,7 +696,7 @@ public class Measurement {
   }
 
   public enum Pressure implements Base {
-    NEWTONS_PER_METER_SQUARED("N/m²", 1.0, 0.0),
+    NEWTONS_PER_METER_SQUARED("N/m\u00B2", 1.0, 0.0),
     GIGAPASCALS("GPa", 1e+9, 0.0),
     MEGAPASCALS("MPa", 1e+6, 0.0),
     KILOPASCALS("kPa", 1e+3, 0.0),
@@ -777,8 +777,8 @@ public class Measurement {
 
   public enum Temperature implements Base {
     KELVIN("K", 1.0, 0),
-    DEGREE_CELSIUS("°C", 1.0, 273.15),
-    DEGREE_FAHRENHEIT("°F", 5.0 / 9.0, 273.15 - 32 * 5.0 / 9.0);
+    DEGREE_CELSIUS("\u00B0C", 1.0, 273.15),
+    DEGREE_FAHRENHEIT("\u00B0F", 5.0 / 9.0, 273.15 - 32 * 5.0 / 9.0);
 
     private final String symbol;
     private final double coefficient;
@@ -818,14 +818,14 @@ public class Measurement {
     DECILITERS("dL", 1e-1, 0.0),
     CENTILITERS("cL", 1e-2, 0.0),
     MILLILITERS("mL", 1e-3, 0.0),
-    CUBIC_KILOMETERS("km³", 1e+12, 0.0),
-    CUBIC_METERS("m³", 1e+3, 0.0),
-    CUBIC_DECIMETERS("dm³", 1.0, 0.0),
-    CUBIC_MILLIMETERS("mm³", 1e-6, 0.0),
-    CUBIC_INCHES("in³", 0.016387064, 0.0),
-    CUBIC_FEET("ft³", 28.3168466, 0.0),
-    CUBIC_YARDS("yd³", 764.554858, 0.0),
-    CUBIC_MILES("mi³", 4.16818183e+12, 0.0),
+    CUBIC_KILOMETERS("km\u00B3", 1e+12, 0.0),
+    CUBIC_METERS("m\u00B3", 1e+3, 0.0),
+    CUBIC_DECIMETERS("dm\u00B3", 1.0, 0.0),
+    CUBIC_MILLIMETERS("mm\u00B3", 1e-6, 0.0),
+    CUBIC_INCHES("in\u00B3", 0.016387064, 0.0),
+    CUBIC_FEET("ft\u00B3", 28.3168466, 0.0),
+    CUBIC_YARDS("yd\u00B3", 764.554858, 0.0),
+    CUBIC_MILES("mi\u00B3", 4.16818183e+12, 0.0),
     ACRE_FEET("af", 1.233e+6, 0.0),
     BUSHELS("bsh", 35.2391, 0.0),
     TEASPOONS("tsp", 0.00492892, 0.0),
