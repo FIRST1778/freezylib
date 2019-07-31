@@ -3,6 +3,9 @@ plugins {
   id 'maven-publish'
   id 'java-library'
 
+  id "com.gradle.plugin-publish" version "0.10.1"
+  id "java-gradle-plugin"
+
   id 'checkstyle'
   id 'com.diffplug.gradle.spotless' version '3.24.0'
   id 'net.ltgt.errorprone' version '0.8.1'
@@ -19,10 +22,9 @@ repositories { mavenCentral() }
 dependencies {
   errorprone('com.google.errorprone:error_prone_core:2.3.3')
 
-  compile wpi.deps.wpilib()
-  compile wpi.deps.vendor.java()
-  nativeZip wpi.deps.vendor.jni(wpi.platforms.roborio)
-  nativeDesktopZip wpi.deps.vendor.jni(wpi.platforms.desktop)
+  wpi.deps.wpilibJni().forEach { nativeZip(it) }
+  wpi.deps.wpilibDesktopJni().forEach { nativeDesktopZip(it) }
+  wpi.deps.wpilibJars().forEach { compile(it) }
 
   implementation 'com.google.guava:guava:28.0-jre'
   implementation 'com.google.code.gson:gson:2.8.5'
@@ -46,20 +48,8 @@ spotless {
   }
 }
 
-task getLogs(type:Exec) {
-  workingDir '../tomcat/bin'
-
-  //on windows:
-  commandLine 'cmd', '/c', 'scp -4 -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -p lvuser@roborio-', {}, '-frc.local:/home/lvuser/log-*.txt', 'logs/'
-
-  commandLine './stop.sh'
-
-  standardOutput = new ByteArrayOutputStream()
-  ext.output = { return standardOutput.toString() }
-}
-
 checkstyle {
-  toolVersion = '8.19'
+  toolVersion = '8.21'
   config = rootProject.resources.text.fromFile('config/checkstyle/checkstyle.xml')
   configProperties = [ 'suppressionFile': project(':').file('config/checkstyle/suppressions.xml') ]
 }

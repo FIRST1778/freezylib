@@ -118,7 +118,7 @@ public class FreezyLog {
     filesDirty = true;
   }
 
-  public static void pollFields() {
+  private static void pollFields() {
     fields.stream()
         .filter(o -> o instanceof PolledField)
         .map(o -> (PolledField) o)
