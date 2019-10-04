@@ -307,10 +307,6 @@ class Measurement(val value: Double, val unit: Base) {
             get() = MEGALITERS
     }
 
-    fun setValue(): Double {
-        return value
-    }
-
     @Throws(IllegalArgumentException::class)
     fun convertTo(other: Base): Measurement {
         return if (unit.baseUnit == other.baseUnit) {
