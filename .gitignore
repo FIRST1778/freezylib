@@ -1,38 +1,76 @@
-# Created by https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode
+### Intellij ###
+# User-specific stuff
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
 
-### C++ ###
-# Prerequisites
-*.d
+# Generated files
+.idea/**/contentModel.xml
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+# Sensitive or high-churn files
+.idea/**/dataSources/
+.idea/**/dataSources.ids
+.idea/**/dataSources.local.xml
+.idea/**/sqlDataSources.xml
+.idea/**/dynamic.xml
+.idea/**/uiDesigner.xml
+.idea/**/dbnavigator.xml
 
-# Precompiled Headers
-*.gch
-*.pch
+# Gradle
+.idea/**/gradle.xml
+.idea/**/libraries
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+# Gradle and Maven with auto-import
+.idea/modules.xml
+.idea/*.iml
+.idea/modules
+*.iml
+*.ipr
 
-# Fortran module files
-*.mod
-*.smod
+# CMake
+cmake-build-*/
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+# Mongo Explorer plugin
+.idea/**/mongoSettings.xml
 
-# Executables
-*.exe
-*.out
-*.app
+# File-based project format
+*.iws
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+# JIRA plugin
+atlassian-ide-plugin.xml
+
+# Cursive Clojure plugin
+.idea/replstate.xml
+
+# Crashlytics plugin (for Android Studio and IntelliJ)
+com_crashlytics_export_strings.xml
+crashlytics.properties
+crashlytics-build.properties
+fabric.properties
+
+# Editor-based Rest Client
+.idea/httpRequests
+
+# Android studio 3.1+ serialized cache file
+.idea/caches/build_file_checksums.ser
+
+# Sonarlint plugin
+.idea/**/sonarlint/
+
+# SonarQube Plugin
+.idea/**/sonarIssues.xml
+
+# Markdown Navigator plugin
+.idea/**/markdown-navigator.xml
+.idea/**/markdown-navigator/
 
 ### Java ###
 # Compiled class file
@@ -59,80 +97,25 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
-### Linux ###
-*~
+### Kotlin ###
+# Compiled class file
 
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
+# Log file
 
-# KDE directory preferences
-.directory
+# BlueJ files
 
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
+# Mobile Tools for Java (J2ME)
 
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
+# Package Files #
 
-### macOS ###
-# General
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Icon must end with two \r
-Icon
-
-# Thumbnails
-._*
-
-# Files that might appear in the root of a volume
-.DocumentRevisions-V100
-.fseventsd
-.Spotlight-V100
-.TemporaryItems
-.Trashes
-.VolumeIcon.icns
-.com.apple.timemachine.donotpresent
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
-### VisualStudioCode ###
-.vscode/
-
-### Windows ###
-# Windows thumbnail cache files
-Thumbs.db
-ehthumbs.db
-ehthumbs_vista.db
-
-# Dump file
-*.stackdump
-
-# Folder config file
-[Dd]esktop.ini
-
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 
 ### Gradle ###
 .gradle
-/build/
+build/
+bin/
+.project
+.classpath
 
 # Ignore Gradle GUI config
 gradle-app.setting
@@ -146,11 +129,5 @@ gradle-app.setting
 # # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
 # gradle/wrapper/gradle-wrapper.properties
 
-# # VS Code Specific Java Settings
-.classpath
-.project
-.settings/
-bin/
-
-
-# End of https://www.gitignore.io/api/c++,java,linux,macos,gradle,windows,visualstudiocode
+### Gradle Patch ###
+**/build/
