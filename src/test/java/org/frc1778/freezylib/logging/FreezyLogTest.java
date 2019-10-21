@@ -9,7 +9,7 @@ import com.google.common.io.Files;
 import edu.wpi.first.wpilibj.DriverStation.MatchType;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import org.frc1778.freezylib.util.Measurement;
 import org.junit.jupiter.api.BeforeEach;
@@ -43,7 +43,7 @@ public class FreezyLogTest {
   public void freezyLogShouldFormatCsvAndJsonFilesToMatchExamples(@TempDir Path folder) {
     FreezyLog.setPath(folder.toString());
     FreezyLog.populateMatchStructure(MatchType.Qualification, 0);
-    FreezyLog.addField(new MetaField("MetaField", "ul", "meta"));
+    FreezyLog.addField(new MetaField("MetaField", Measurement.Unitless.UNITLESS, "meta"));
     FreezyLog.addField(new PolledField("PolledField", Measurement.Length.INCHES, () -> "polled"));
     var subscribedField =
         new SubscribedField("SubscribedField", Measurement.Angle.DEGREES, String.class);
@@ -75,7 +75,7 @@ public class FreezyLogTest {
   }
 
   private String readFileAsCharSource(File file) throws IOException {
-    return Files.asCharSource(file, Charset.forName("UTF-8"))
+    return Files.asCharSource(file, StandardCharsets.UTF_8)
         .read()
         .replaceAll("\\r\\n", "\n")
         .replaceAll("\\r", "\n");

@@ -1,8 +1,8 @@
 plugins {
     id("org.jetbrains.kotlin.jvm") version "1.3.41"
 
-    `idea`
-    `maven`
+    idea
+    maven
     `maven-publish`
     `java-library`
 

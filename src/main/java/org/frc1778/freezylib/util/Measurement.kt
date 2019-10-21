@@ -5,16 +5,20 @@ package org.frc1778.freezylib.util
  *
  * @author FRC 1778 Chill Out
  */
-class Measurement(val value: Double, val unit: Base) {
+class Measurement(val value: Double, private val unit: Base) {
 
     interface Base {
         val symbol: String
-
         val coefficient: Double
-
         val constant: Double
-
         val baseUnit: Base
+    }
+
+    enum class Unitless(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+        UNITLESS("ul", 1.0, 0.0);
+
+        override val baseUnit: Base
+            get() = UNITLESS
     }
 
     enum class Acceleration(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {

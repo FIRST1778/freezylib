@@ -1,0 +1,26 @@
+package org.frc1778.freezylib.logging
+
+import org.frc1778.freezylib.util.Measurement
+
+class TaggedField(name: String, unit: Measurement.Base, type: Class<*>) : Field() {
+
+    private var isNewValue = false
+    override var value: String = ""
+        get() {
+            val out = if (isNewValue) field else ""
+            isNewValue = false
+            return out
+        }
+
+    init {
+        this.name = name
+        this.unit = unit.symbol
+        this.value = value
+        setType(type)
+    }
+
+    fun <T> updateTag(value: T) {
+        this.value = value.toString()
+        isNewValue = true
+    }
+}

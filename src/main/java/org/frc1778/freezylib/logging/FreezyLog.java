@@ -133,7 +133,7 @@ public class FreezyLog {
     return fields.stream().filter(o -> o.getName().equals(name)).findFirst().get();
   }
 
-  public static String getCsvHeader() {
+  private static String getCsvHeader() {
     return fields.stream()
         .filter(o -> !o.getClass().equals(MetaField.class))
         .map(o -> o.getName())

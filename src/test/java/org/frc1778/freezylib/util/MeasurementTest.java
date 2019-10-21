@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 public class MeasurementTest {
 
   @Test
-  public void testConversion() {
+  private void testConversion() {
     var kilometer = new Measurement(1.5, Measurement.Length.KILOMETERS);
     assertThat(kilometer.convertTo(Measurement.Length.INCHES).getValue())
         .isEqualTo(59055.118110236224, Offset.offset(1e-9));
@@ -24,7 +24,7 @@ public class MeasurementTest {
   }
 
   @Test
-  public void incompatibleTypesShouldThrowException() {
+  private void incompatibleTypesShouldThrowException() {
     assertThatExceptionOfType(IllegalArgumentException.class)
         .isThrownBy(
             () ->
