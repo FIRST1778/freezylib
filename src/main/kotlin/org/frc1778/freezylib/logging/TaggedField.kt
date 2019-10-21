@@ -1,8 +1,9 @@
 package org.frc1778.freezylib.logging
 
 import org.frc1778.freezylib.util.Measurement
+import kotlin.reflect.KClass
 
-class TaggedField(name: String, unit: Measurement.Base, type: Class<*>) : Field() {
+class TaggedField(name: String, unit: Measurement.Base, type: KClass<*>) : Field() {
 
     private var isNewValue = false
     override var value: String = ""

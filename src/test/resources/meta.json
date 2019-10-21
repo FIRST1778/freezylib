@@ -3,16 +3,16 @@
     "value": "meta",
     "name": "MetaField",
     "unit": "ul",
-    "type": "java.lang.String"
+    "type": "class java.lang.String (Kotlin reflection is not available)"
   },
   {
     "name": "PolledField",
     "unit": "in",
-    "type": "java.lang.String"
+    "type": "class java.lang.String (Kotlin reflection is not available)"
   },
   {
     "name": "SubscribedField",
     "unit": "°",
-    "type": "java.lang.String"
+    "type": "class java.lang.String (Kotlin reflection is not available)"
   }
 ]

@@ -2,6 +2,7 @@ package org.frc1778.freezylib.logging
 
 import com.google.gson.annotations.Expose
 import org.frc1778.freezylib.util.Measurement
+import kotlin.reflect.KClass
 
 abstract class Field {
 
@@ -15,7 +16,7 @@ abstract class Field {
         this.unit = unit.toString()
     }
 
-    fun setType(type: Class<*>) {
-        this.type = type.name
+    fun setType(type: KClass<*>) {
+        this.type = type.toString()
     }
 }

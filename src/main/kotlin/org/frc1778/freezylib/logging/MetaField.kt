@@ -12,6 +12,6 @@ class MetaField<T>(name: String, unit: Measurement.Base, value: T) : Field() {
         this.name = name
         this.unit = unit.symbol
         this.value = value.toString()
-        setType((value as Any)::class.java)
+        setType((value as Any)::class)
     }
 }
