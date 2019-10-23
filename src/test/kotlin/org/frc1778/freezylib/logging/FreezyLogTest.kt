@@ -1,64 +1,46 @@
 package org.frc1778.freezylib.logging
 
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.jupiter.api.Assertions.fail
-
-import com.google.common.io.Files
 import edu.wpi.first.wpilibj.DriverStation.MatchType
-import java.io.File
-import java.io.IOException
-import java.nio.charset.StandardCharsets
-import java.nio.file.Path
+import io.kotlintest.shouldBe
+import io.kotlintest.shouldNotThrowAny
+import io.kotlintest.shouldThrow
+import io.kotlintest.specs.StringSpec
 import org.frc1778.freezylib.util.Measurement
-import org.junit.jupiter.api.BeforeEach
-import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertDoesNotThrow
-import org.junit.jupiter.api.io.TempDir
-import kotlin.test.assertFailsWith
 
 /**
  * Tests the FreezyLog class and main methods.
  *
  * @author FRC 1778 Chill Out
  */
-class FreezyLogTest {
+class FreezyLogTest : StringSpec() {
 
-    @BeforeEach
-    private fun dumpFreezyLog() {
+    init {
         FreezyLog.dump()
-    }
+        FreezyLog.setPath(createTempDir().toString())
 
-    @Test
-    private fun providingAnInvalidFileNameShouldThrowException() {
-        assertFailsWith<Exception> { FreezyLog.setMetaFileName("/meta.notjson") }
-        assertDoesNotThrow { FreezyLog.setMetaFileName("/meta.json") }
+        "An invalid file name should throw an exception" {
+            shouldThrow<Exception> { FreezyLog.setMetaFileName("/meta.notjson") }
+            shouldThrow<Exception> { FreezyLog.setLogFileName("/meta.notcsv") }
+        }
 
-        assertFailsWith<Exception> { FreezyLog.setLogFileName("/log.notcsv") }
-        assertDoesNotThrow { FreezyLog.setLogFileName("/log.csv") }
-    }
+        "A valid file name should not throw an exception" {
+            shouldNotThrowAny { FreezyLog.setMetaFileName("/meta.json") }
+            shouldNotThrowAny { FreezyLog.setLogFileName("/meta.csv") }
+        }
 
-    @Test
-    private fun freezyLogShouldFormatCsvAndJsonFilesToMatchExamples(@TempDir folder: Path) {
-        FreezyLog.setPath(folder.toString())
-        FreezyLog.populateMatchStructure(MatchType.Qualification, 0)
-        FreezyLog.addField(MetaField("MetaField", Measurement.Unitless.UNITLESS, "meta"))
-        FreezyLog.addField(PolledField("PolledField", Measurement.Length.INCHES) { "polled" })
-        val subscribedField = SubscribedField("SubscribedField", Measurement.Angle.DEGREES, String::class)
-        FreezyLog.addField(subscribedField)
-        subscribedField.pushValue("subscribed")
+            FreezyLog.populateMatchStructure(MatchType.Qualification, 0)
+            FreezyLog.addField(MetaField("MetaField", Measurement.Unitless.UNITLESS, "meta"))
+            FreezyLog.addField(PolledField("PolledField", Measurement.Length.INCHES) { "polled" })
+            val subscribedField = SubscribedField("SubscribedField", Measurement.Angle.DEGREES, String::class)
+            FreezyLog.addField(subscribedField)
+            subscribedField.pushValue("subscribed")
+            FreezyLog.log()
 
-        FreezyLog.log()
-
-        try {
-            assertThat(readFileAsCharSource(FreezyLog.logFile)).isEqualTo(readFileAsCharSource(File(Thread.currentThread().contextClassLoader.getResource("log.csv")!!.file)))
-            assertThat(readFileAsCharSource(FreezyLog.metaFile)).isEqualTo(readFileAsCharSource(File(Thread.currentThread().contextClassLoader.getResource("meta.json")!!.file)))
-        } catch (e: IOException) {
-            fail<Any>(e.message)
+            "Log file should match with example CSV" {
+                FreezyLog.logFile.readText() shouldBe Thread.currentThread().contextClassLoader.getResource("log.csv")!!.readText()
+            }
+            "Meta file should match with example JSON" {
+                FreezyLog.metaFile.readText() shouldBe Thread.currentThread().contextClassLoader.getResource("meta.json")!!.readText()
+            }
         }
     }
-
-    @Throws(IOException::class)
-    private fun readFileAsCharSource(file: File): String {
-        return Files.asCharSource(file, StandardCharsets.UTF_8).read().replace("\\r\\n".toRegex(), "\n").replace("\\r".toRegex(), "\n")
-    }
-}

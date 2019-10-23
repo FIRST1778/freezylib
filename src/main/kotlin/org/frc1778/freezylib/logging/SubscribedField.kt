@@ -1,7 +1,7 @@
 package org.frc1778.freezylib.logging
 
-import org.frc1778.freezylib.util.Measurement
 import kotlin.reflect.KClass
+import org.frc1778.freezylib.util.Measurement
 
 class SubscribedField(name: String, unit: Measurement.Base, type: KClass<*>) : Field() {
 
