@@ -1,4 +1,4 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 
 plugins {
     kotlin("jvm") version "1.3.50"
@@ -9,12 +9,12 @@ plugins {
     `java-library`
 
     id("org.jetbrains.dokka") version "0.10.0"
-    id("com.diffplug.gradle.spotless") version "3.24.0"
-    id("com.github.ben-manes.versions") version "0.21.0"
+    id("com.diffplug.gradle.spotless") version "3.25.0"
+    id("com.github.ben-manes.versions") version "0.27.0"
 
     id("io.gitlab.arturbosch.detekt") version "1.1.1"
 
-    id("edu.wpi.first.GradleRIO") version "2019.4.1"
+    id("edu.wpi.first.GradleRIO") version "2020.1.1-beta-1"
 }
 
 group = "com.github.MTHSRoboticsClub"
@@ -26,23 +26,23 @@ repositories {
 dependencies {
     implementation(platform(kotlin("bom")))
     implementation(kotlin("stdlib-jdk8"))
-    implementation(kotlin("test-junit5"))
 
-    implementation("com.google.guava:guava:28.0-jre")
-    implementation("com.google.code.gson:gson:2.8.5")
+    implementation("com.google.guava:guava:28.1-jre")
+    implementation("com.google.code.gson:gson:2.8.6")
     wpi.deps.wpilib().forEach { compile(it) }
 
-    testImplementation("org.junit.jupiter:junit-jupiter:5.5.1")
-    testImplementation("org.assertj:assertj-core:3.13.1")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
 }
 
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.8"
-}
+tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = "1.8"
+        dependsOn("spotlessApply")
+    }
 
-tasks.test {
-    useJUnitPlatform()
-    testLogging.showStandardStreams = true
+    test {
+        useJUnitPlatform {}
+    }
 }
 
 spotless {
