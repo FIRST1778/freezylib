@@ -2,6 +2,24 @@
   {
     "value": "meta",
     "name": "MetaField",
+    "symbol": "ul",
+    "unit": "UNITLESS",
+    "type": "class kotlin.String"
+  },
+  {
+    "name": "PolledField",
+    "symbol": "in",
+    "unit": "INCHES",
+    "type": "class kotlin.String"
+  },
+  {
+    "name": "SubscribedField",
+    "symbol": "°",
+    "unit": "DEGREES",
+    "type": "class kotlin.String"[
+  {
+    "value": "meta",
+    "name": "MetaField",
     "unit": "ul",
     "type": "class kotlin.String"
   },
@@ -14,5 +32,7 @@
     "name": "SubscribedField",
     "unit": "°",
     "type": "class kotlin.String"
+  }
+]
   }
 ]

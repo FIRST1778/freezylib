@@ -9,7 +9,7 @@ class PolledField<T>(name: String, unit: Measurement.Base, supplier: () -> T) : 
 
     init {
         this.name = name
-        this.unit = unit.symbol
+        this.unit = unit
         setType((supplier.invoke() as Any)::class)
         this.supplier = { supplier().toString() }
     }

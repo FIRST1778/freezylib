@@ -28,19 +28,19 @@ class FreezyLogTest : StringSpec() {
             shouldNotThrowAny { FreezyLog.setLogFileName("/meta.csv") }
         }
 
-            FreezyLog.populateMatchStructure(MatchType.Qualification, 0)
-            FreezyLog.addField(MetaField("MetaField", Measurement.Unitless.UNITLESS, "meta"))
-            FreezyLog.addField(PolledField("PolledField", Measurement.Length.INCHES) { "polled" })
-            val subscribedField = SubscribedField("SubscribedField", Measurement.Angle.DEGREES, String::class)
-            FreezyLog.addField(subscribedField)
-            subscribedField.pushValue("subscribed")
-            FreezyLog.log()
+        FreezyLog.populateMatchStructure(MatchType.Qualification, 0)
+        FreezyLog.addField(MetaField("MetaField", Measurement.Unitless.UNITLESS, "meta"))
+        FreezyLog.addField(PolledField("PolledField", Measurement.Length.INCHES) { "polled" })
+        val subscribedField = SubscribedField("SubscribedField", Measurement.Angle.DEGREES, String::class)
+        FreezyLog.addField(subscribedField)
+        subscribedField.pushValue("subscribed")
+        FreezyLog.log()
 
-            "Log file should match with example CSV" {
-                FreezyLog.logFile.readText() shouldBe Thread.currentThread().contextClassLoader.getResource("log.csv")!!.readText()
-            }
-            "Meta file should match with example JSON" {
-                FreezyLog.metaFile.readText() shouldBe Thread.currentThread().contextClassLoader.getResource("meta.json")!!.readText()
-            }
+        "Log file should match with example CSV" {
+            FreezyLog.logFile.readText() shouldBe Thread.currentThread().contextClassLoader.getResource("log.csv")!!.readText()
+        }
+        "Meta file should match with example JSON" {
+            FreezyLog.metaFile.readText() shouldBe Thread.currentThread().contextClassLoader.getResource("meta.json")!!.readText()
         }
     }
+}

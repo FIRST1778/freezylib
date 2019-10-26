@@ -10,7 +10,7 @@ class MetaField<T>(name: String, unit: Measurement.Base, value: T) : Field() {
 
     init {
         this.name = name
-        this.unit = unit.symbol
+        this.unit = unit
         this.value = value.toString()
         setType((value as Any)::class)
     }

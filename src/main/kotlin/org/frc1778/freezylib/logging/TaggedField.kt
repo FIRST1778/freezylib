@@ -15,7 +15,7 @@ class TaggedField(name: String, unit: Measurement.Base, type: KClass<*>) : Field
 
     init {
         this.name = name
-        this.unit = unit.symbol
+        this.unit = unit
         this.value = value
         setType(type)
     }

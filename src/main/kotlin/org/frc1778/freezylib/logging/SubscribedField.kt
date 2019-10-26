@@ -9,7 +9,7 @@ class SubscribedField(name: String, unit: Measurement.Base, type: KClass<*>) : F
 
     init {
         this.name = name
-        this.unit = unit.symbol
+        this.unit = unit
         setType(type)
     }
 
