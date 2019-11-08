@@ -308,7 +308,7 @@ class Measurement(val value: Double, private val unit: Base) {
         METRIC_CUPS("metric cup", 0.25, 0.0);
 
         override val baseUnit: Base
-            get() = MEGALITERS
+            get() = LITERS
     }
 
     @Throws(IllegalArgumentException::class)

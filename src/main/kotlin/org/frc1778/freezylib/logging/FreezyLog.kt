@@ -44,7 +44,7 @@ object FreezyLog {
         val path = Path.of(
                 pathToLogDirectory,
                 matchType.name.toLowerCase(Locale.ENGLISH),
-                "match" + String.format("%02d", matchNumber))
+                "match" + String.format("%03d", matchNumber))
         try {
             Files.createDirectories(path)
             metaFile = File(path.toString(), jsonFileName)
