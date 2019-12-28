@@ -1,0 +1,6 @@
+build:
+  maxIssues: -1
+
+style:
+  MagicNumber:
+    active: false

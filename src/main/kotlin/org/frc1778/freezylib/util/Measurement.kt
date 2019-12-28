@@ -13,14 +13,23 @@ class Measurement(val value: Double, private val unit: Base) {
         val constant: Double
         val baseUnit: Base
     }
-    enum class Unitless(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+
+    enum class Unitless(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         UNITLESS("ul", 1.0, 0.0);
 
         override val baseUnit: Base
             get() = UNITLESS
     }
 
-    enum class Acceleration(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Acceleration(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         METERS_PER_SECOND_SQUARED("m/s\u00B2", 1.0, 0.0),
         GRAVITY("g", 9.80665, 0.0);
 
@@ -28,7 +37,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = METERS_PER_SECOND_SQUARED
     }
 
-    enum class Angle(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Angle(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         DEGREES("\u00B0", 1.0, 0.0),
         ARC_MINUTES("\u02B9", 1.0 / 60, 0.0),
         ARC_SECONDS("\u02BA", 1.0 / 3600, 0.0),
@@ -40,7 +53,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = DEGREES
     }
 
-    enum class Area(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Area(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         SQUARE_MEGAMETERS("Mm\u00B2", 1e+12, 0.0),
         SQUARE_KILOMETERS("km\u00B2", 1e+6, 0.0),
         SQUARE_METERS("m\u00B2", 1.0, 0.0),
@@ -60,7 +77,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = SQUARE_METERS
     }
 
-    enum class ConcentrationMass(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class ConcentrationMass(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         GRAMS_PER_LITER("g/L", 1.0, 0.0),
         MILLIGRAMS_PER_DECILITER("mg/dL", 0.01, 0.0);
 
@@ -68,14 +89,22 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = GRAMS_PER_LITER
     }
 
-    enum class Dispersion(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Dispersion(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         PARTS_PER_MILLION("ppm", 1.0, 0.0);
 
         override val baseUnit: Base
             get() = PARTS_PER_MILLION
     }
 
-    enum class Duration(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Duration(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         MICROSECONDS("\u00B5s", 1e-6, 0.0),
         MILLISECONDS("ms", 1e-3, 0.0),
         SECONDS("s", 1.0, 0.0),
@@ -86,7 +115,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = SECONDS
     }
 
-    enum class ElectricCharge(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class ElectricCharge(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         COULOMBS("C", 1.0, 0.0),
         MEGAAMPERE_HOURS("MAh", 3.6e+9, 0.0),
         KILOAMPERE_HOURS("kAh", 3.6e+6, 0.0),
@@ -98,7 +131,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = COULOMBS
     }
 
-    enum class ElectricCurrent(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class ElectricCurrent(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         MEGAAMPERES("MA", 1e+6, 0.0),
         KILOAMPERES("kA", 1e+3, 0.0),
         AMPERES("A", 1.0, 0.0),
@@ -109,7 +146,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = AMPERES
     }
 
-    enum class ElectricPotentialDifference(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class ElectricPotentialDifference(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         MEGAVOLTS("MV", 1e+6, 0.0),
         KILOVOLTS("kV", 1e+3, 0.0),
         VOLTS("V", 1.0, 0.0),
@@ -120,7 +161,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = VOLTS
     }
 
-    enum class ElectricResistance(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class ElectricResistance(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         MEGAOHMS("M\u2126", 1e+6, 0.0),
         KILOOHMS("k\u2126", 1e+3, 0.0),
         OHMS("\u2126", 1.0, 0.0),
@@ -131,7 +176,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = OHMS
     }
 
-    enum class Energy(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Energy(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         KILOJOULES("kJ", 1e+3, 0.0),
         JOULES("J", 1.0, 0.0),
         KILOCALORIES("kCal", 4184.0, 0.0),
@@ -142,7 +191,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = JOULES
     }
 
-    enum class Frequency(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Frequency(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         TERAHERTZ("THz", 1e+12, 0.0),
         GIGAHERTZ("GHz", 1e+9, 0.0),
         MEGAHERTZ("MHz", 1e+6, 0.0),
@@ -156,7 +209,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = HERTZ
     }
 
-    enum class FuelEfficiency(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class FuelEfficiency(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         LITERS_PER_100_KILOMETERS("L/100km", 1.0, 0.0),
         MILES_PER_GALLON("mpg", 0.00425142851, 0.0),
         MILES_PER_IMPERIAL_GALLON("mpg", 0.0035400531, 0.0);
@@ -165,14 +222,22 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = LITERS_PER_100_KILOMETERS
     }
 
-    enum class Illuminance(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Illuminance(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         LUX("lx", 1.0, 0.0);
 
         override val baseUnit: Base
             get() = LUX
     }
 
-    enum class Length(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Length(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         MEGAMETERS("Mm", 1e+6, 0.0),
         KILOMETERS("kM", 1e+3, 0.0),
         HECTOMETERS("hm", 1e+2, 0.0),
@@ -200,7 +265,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = METERS
     }
 
-    enum class Mass(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Mass(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         KILOGRAMS("kg", 1.0, 0.0),
         GRAMS("g", 1e-3, 0.0),
         DECIGRAMS("dg", 1e-4, 0.0),
@@ -222,7 +291,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = KILOGRAMS
     }
 
-    enum class Power(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Power(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         TERAWATTS("TW", 1e+12, 0.0),
         GIGAWATTS("GW", 1e+9, 0.0),
         MEGAWATTS("MW", 1e+6, 0.0),
@@ -239,7 +312,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = WATTS
     }
 
-    enum class Pressure(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Pressure(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         NEWTONS_PER_METER_SQUARED("N/m\u00B2", 1.0, 0.0),
         GIGAPASCALS("GPa", 1e+9, 0.0),
         MEGAPASCALS("MPa", 1e+6, 0.0),
@@ -255,7 +332,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = NEWTONS_PER_METER_SQUARED
     }
 
-    enum class Speed(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Speed(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         METERS_PER_SECOND("m/s", 1.0, 0.0),
         KILOMETERS_PER_HOUR("km/h", 5.0 / 18, 0.0),
         MILES_PER_HOUR("mph", 5.0 / 18 * 1.609344, 0.0),
@@ -265,7 +346,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = METERS_PER_SECOND
     }
 
-    enum class Temperature(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Temperature(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         KELVIN("K", 1.0, 0.0),
         DEGREE_CELSIUS("\u00B0C", 1.0, 273.15),
         DEGREE_FAHRENHEIT("\u00B0F", 5.0 / 9.0, 273.15 - 32 * 5.0 / 9.0);
@@ -274,7 +359,11 @@ class Measurement(val value: Double, private val unit: Base) {
             get() = KELVIN
     }
 
-    enum class Volume(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
+    enum class Volume(
+        override val symbol: String,
+        override val coefficient: Double,
+        override val constant: Double
+    ) : Base {
         MEGALITERS("ML", 1e+6, 0.0),
         KILOLITERS("kL", 1e+3, 0.0),
         LITERS("L", 1.0, 0.0),
@@ -314,8 +403,9 @@ class Measurement(val value: Double, private val unit: Base) {
     fun convertTo(other: Base): Measurement {
         return if (unit.baseUnit == other.baseUnit) {
             Measurement(
-                    (unit.coefficient * value + unit.constant - other.constant) / other.coefficient,
-                    other)
+                (unit.coefficient * value + unit.constant - other.constant) / other.coefficient,
+                other
+            )
         } else {
             throw IllegalArgumentException()
         }

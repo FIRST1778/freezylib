@@ -2,6 +2,7 @@ package org.frc1778.freezylib.logging
 
 abstract class FreezyLogRunnable : Runnable {
 
+    @Suppress("TooGenericExceptionCaught")
     override fun run() {
         try {
             runWithLogging()

@@ -30,13 +30,22 @@ object FreezyLog {
 
     private var filesDirty = true
 
-    private val gson = GsonBuilder().setPrettyPrinting().serializeNulls().excludeFieldsWithoutExposeAnnotation().create()
+    private val gson =
+        GsonBuilder().setPrettyPrinting().serializeNulls().excludeFieldsWithoutExposeAnnotation().create()
 
     val csvHeader: String
-        get() = fields.stream().filter { it::class != MetaField::class }.map { o -> o.name }.collect(Collectors.joining(","))
+        get() = fields.stream().filter { it::class != MetaField::class }.map { o -> o.name }.collect(
+            Collectors.joining(
+                ","
+            )
+        )
 
     private val collectedFields: String
-        get() = fields.stream().filter { it::class != MetaField::class }.map { o -> o.value }.collect(Collectors.joining(","))
+        get() = fields.stream().filter { it::class != MetaField::class }.map { o -> o.value }.collect(
+            Collectors.joining(
+                ","
+            )
+        )
 
     fun setPath(path: String) {
         pathToLogDirectory = path
@@ -59,12 +68,12 @@ object FreezyLog {
         filesDirty = true
     }
 
-    @Throws(Exception::class)
+    @Throws(IOException::class)
     fun setLogFileName(name: String) {
         val i = name.lastIndexOf('.')
 
         if ((if (i > 0) name.substring(i + 1) else "") != "csv") {
-            throw Exception(
+            throw IOException(
                     "Invalid file extension, should be 'csv', but was '" +
                             (if (i > 0) name.substring(i + 1) else "") +
                             "'.")
@@ -75,12 +84,12 @@ object FreezyLog {
         filesDirty = true
     }
 
-    @Throws(Exception::class)
+    @Throws(IOException::class)
     fun setMetaFileName(name: String) {
         val i = name.lastIndexOf('.')
 
         if ((if (i > 0) name.substring(i + 1) else "") != "json") {
-            throw Exception(
+            throw IOException(
                     "Invalid file extension, should be 'json', but was '" +
                             (if (i > 0) name.substring(i + 1) else "") +
                             "'.")

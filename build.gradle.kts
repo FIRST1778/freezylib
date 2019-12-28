@@ -53,5 +53,6 @@ spotless {
 }
 
 detekt {
-    config = files("$rootDir/detekt-config.yml")
+    buildUponDefaultConfig = true
+    config = files("$rootDir/config/detekt/config.yml")
 }
