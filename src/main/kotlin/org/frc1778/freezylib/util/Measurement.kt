@@ -13,7 +13,6 @@ class Measurement(val value: Double, private val unit: Base) {
         val constant: Double
         val baseUnit: Base
     }
-
     enum class Unitless(override val symbol: String, override val coefficient: Double, override val constant: Double) : Base {
         UNITLESS("ul", 1.0, 0.0);
 

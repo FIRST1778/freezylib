@@ -8,6 +8,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.util.Locale
 import java.util.stream.Collectors
+import org.frc1778.freezylib.util.Measurement
 
 /**
  * A logging framework to log data from the robot to files on the robot.
@@ -16,7 +17,9 @@ import java.util.stream.Collectors
  */
 object FreezyLog {
 
-    private var fields = mutableListOf<Field>()
+    val exceptionsField = TaggedField("Exceptions", Measurement.Unitless.UNITLESS, String::class)
+
+    private var fields = mutableListOf<Field>(exceptionsField)
 
     private var csvFileName = "log.csv"
     private var jsonFileName = "meta.json"
@@ -100,6 +103,7 @@ object FreezyLog {
 
     fun dump() {
         fields.clear()
+        fields.add(exceptionsField)
         filesDirty = true
     }
 
@@ -108,10 +112,6 @@ object FreezyLog {
                 .filter { o -> o is PolledField<*> }
                 .map { o -> o as PolledField<*> }
                 .forEach { it.pollSupplier() }
-    }
-
-    fun getFields(): List<Field> {
-        return fields
     }
 
     fun getFieldByName(name: String): Field {

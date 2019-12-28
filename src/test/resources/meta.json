@@ -1,5 +1,11 @@
 [
   {
+    "name": "Exceptions",
+    "symbol": "ul",
+    "unit": "UNITLESS",
+    "type": "class kotlin.String"
+  },
+  {
     "value": "meta",
     "name": "MetaField",
     "symbol": "ul",
@@ -16,23 +22,6 @@
     "name": "SubscribedField",
     "symbol": "°",
     "unit": "DEGREES",
-    "type": "class kotlin.String"[
-  {
-    "value": "meta",
-    "name": "MetaField",
-    "unit": "ul",
     "type": "class kotlin.String"
-  },
-  {
-    "name": "PolledField",
-    "unit": "in",
-    "type": "class kotlin.String"
-  },
-  {
-    "name": "SubscribedField",
-    "unit": "°",
-    "type": "class kotlin.String"
-  }
-]
   }
 ]
