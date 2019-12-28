@@ -15,10 +15,9 @@ plugins {
     id("edu.wpi.first.GradleRIO") version "2020.1.1-beta-4"
 }
 
-group = "com.github.MTHSRoboticsClub"
-
 repositories {
     mavenCentral()
+    jcenter()
 }
 
 dependencies {
@@ -41,6 +40,10 @@ tasks {
     test {
         useJUnitPlatform {}
     }
+
+    wrapper {
+        gradleVersion = "6.0.1"
+    }
 }
 
 spotless {
@@ -51,12 +54,4 @@ spotless {
 
 detekt {
     config = files("$rootDir/detekt-config.yml")
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("freezylib") {
-            from(components["java"])
-        }
-    }
 }
