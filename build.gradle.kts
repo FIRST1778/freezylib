@@ -1,7 +1,5 @@
-
-
 plugins {
-    kotlin("jvm") version "1.3.50"
+    kotlin("jvm") version "1.3.61"
 
     idea
     maven
@@ -9,12 +7,12 @@ plugins {
     `java-library`
 
     id("org.jetbrains.dokka") version "0.10.0"
-    id("com.diffplug.gradle.spotless") version "3.25.0"
+    id("com.diffplug.gradle.spotless") version "3.26.1"
     id("com.github.ben-manes.versions") version "0.27.0"
 
-    id("io.gitlab.arturbosch.detekt") version "1.1.1"
+    id("io.gitlab.arturbosch.detekt") version "1.3.0"
 
-    id("edu.wpi.first.GradleRIO") version "2020.1.1-beta-1"
+    id("edu.wpi.first.GradleRIO") version "2020.1.1-beta-4"
 }
 
 group = "com.github.MTHSRoboticsClub"
@@ -27,7 +25,7 @@ dependencies {
     implementation(platform(kotlin("bom")))
     implementation(kotlin("stdlib-jdk8"))
 
-    implementation("com.google.guava:guava:28.1-jre")
+    implementation("com.google.guava:guava:28.2-jre")
     implementation("com.google.code.gson:gson:2.8.6")
     wpi.deps.wpilib().forEach { compile(it) }
 
