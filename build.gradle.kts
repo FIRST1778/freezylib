@@ -12,7 +12,7 @@ plugins {
 
     id("io.gitlab.arturbosch.detekt") version "1.3.0"
 
-    id("edu.wpi.first.GradleRIO") version "2020.1.1-beta-4"
+    id("edu.wpi.first.GradleRIO") version "2019.4.1"
 }
 
 repositories {
