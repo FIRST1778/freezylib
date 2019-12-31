@@ -17,6 +17,7 @@ abstract class LoggedTimedRobot {
                 FreezyLog.populateMatchStructure(DriverStation.getInstance().matchType, DriverStation.getInstance().matchNumber)
                 this@LoggedTimedRobot.robotInit()
                 LiveWindow.disableAllTelemetry()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
@@ -25,6 +26,7 @@ abstract class LoggedTimedRobot {
         override fun autonomousInit() {
             try {
                 this@LoggedTimedRobot.autonomousInit()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
@@ -33,6 +35,7 @@ abstract class LoggedTimedRobot {
         override fun teleopInit() {
             try {
                 this@LoggedTimedRobot.teleopInit()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
@@ -41,6 +44,7 @@ abstract class LoggedTimedRobot {
         override fun disabledInit() {
             try {
                 this@LoggedTimedRobot.disabledInit()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
@@ -49,6 +53,7 @@ abstract class LoggedTimedRobot {
         override fun testInit() {
             try {
                 this@LoggedTimedRobot.testInit()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
@@ -66,6 +71,7 @@ abstract class LoggedTimedRobot {
         override fun autonomousPeriodic() {
             try {
                 this@LoggedTimedRobot.autonomousPeriodic()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
@@ -74,6 +80,7 @@ abstract class LoggedTimedRobot {
         override fun teleopPeriodic() {
             try {
                 this@LoggedTimedRobot.teleopPeriodic()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
@@ -82,6 +89,7 @@ abstract class LoggedTimedRobot {
         override fun disabledPeriodic() {
             try {
                 this@LoggedTimedRobot.disabledPeriodic()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
