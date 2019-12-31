@@ -57,6 +57,7 @@ abstract class LoggedTimedRobot {
         override fun robotPeriodic() {
             try {
                 this@LoggedTimedRobot.robotPeriodic()
+                FreezyLog.log()
             } catch (e: Exception) {
                 FreezyLog.logException(e)
             }
