@@ -3,12 +3,12 @@ package org.frc1778.freezylib.util
 import edu.wpi.first.wpilibj.DriverStation
 
 /**
- * Contains constants for The parent class of all joysticks, allowing for driver input to be easily altered for
+ * Contains constants for the parent class of all controllers, allowing for driver input to be easily altered for
  * different devices.
  *
  * @author FRC 1778 Chill Out
  */
-object Joystick {
+object Controllers {
 
     fun isConnected(name: String, port: Int): Boolean {
         return if (DriverStation.getInstance().isDSAttached)
