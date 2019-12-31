@@ -5,6 +5,7 @@ import io.kotlintest.shouldBe
 import io.kotlintest.shouldNotThrowAny
 import io.kotlintest.shouldThrow
 import io.kotlintest.specs.StringSpec
+import java.io.IOException
 import org.frc1778.freezylib.util.Measurement
 
 /**
@@ -31,10 +32,26 @@ class FreezyLogTest : StringSpec() {
         FreezyLog.populateMatchStructure(MatchType.Qualification, 0)
         FreezyLog.addField(MetaField("MetaField", Measurement.Unitless.UNITLESS, "meta"))
         FreezyLog.addField(PolledField("PolledField", Measurement.Length.INCHES) { "polled" })
-        val subscribedField = SubscribedField("SubscribedField", Measurement.Angle.DEGREES, String::class)
+
+        val taggedField = TaggedField("TaggedField", Measurement.Acceleration.METERS_PER_SECOND_SQUARED, Int::class)
+        taggedField.updateTag(0)
+        FreezyLog.addField(taggedField)
+
+        val subscribedField = SubscribedField("SubscribedField", Measurement.Angle.DEGREES, Int::class)
+        subscribedField.pushValue(0)
         FreezyLog.addField(subscribedField)
-        subscribedField.pushValue("subscribed")
-        FreezyLog.log()
+
+        try {
+            throw IOException("Forcefully thrown exception")
+        } catch (e: Exception) {
+            FreezyLog.logException(e)
+        }
+
+        for (i in 1 until 4) {
+            FreezyLog.log()
+            subscribedField.pushValue(i)
+            taggedField.updateTag(-i)
+        }
 
         "Log file should match with example CSV" {
             FreezyLog.logFile.readText() shouldBe Thread.currentThread().contextClassLoader.getResource("log.csv")!!.readText()

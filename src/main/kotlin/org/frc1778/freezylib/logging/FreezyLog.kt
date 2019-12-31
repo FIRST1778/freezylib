@@ -4,6 +4,8 @@ import com.google.gson.GsonBuilder
 import edu.wpi.first.wpilibj.DriverStation.MatchType
 import java.io.File
 import java.io.IOException
+import java.io.PrintWriter
+import java.io.StringWriter
 import java.nio.file.Files
 import java.nio.file.Path
 import java.util.Locale
@@ -18,6 +20,8 @@ import org.frc1778.freezylib.util.Measurement
 object FreezyLog {
 
     val exceptionsField = TaggedField("Exceptions", Measurement.Unitless.UNITLESS, String::class)
+    private val exceptionStringWriter = StringWriter()
+    private val exceptionPrintWriter = PrintWriter(exceptionStringWriter)
 
     private var fields = mutableListOf<Field>(exceptionsField)
 
@@ -41,11 +45,15 @@ object FreezyLog {
         )
 
     private val collectedFields: String
-        get() = fields.stream().filter { it::class != MetaField::class }.map { o -> o.value }.collect(
-            Collectors.joining(
-                ","
+        get() {
+            val out = fields.stream().filter { it::class != MetaField::class }.map { o -> o.value }.collect(
+                Collectors.joining(
+                    ","
+                )
             )
-        )
+            fields.stream().filter { o -> o is TaggedField }.map { o -> o as TaggedField }.forEach { it.acknowledgeTag() }
+            return out
+        }
 
     fun setPath(path: String) {
         pathToLogDirectory = path
@@ -112,8 +120,7 @@ object FreezyLog {
 
     fun dump() {
         fields.clear()
-        fields.add(exceptionsField)
-        filesDirty = true
+        addField(exceptionsField)
     }
 
     private fun pollFields() {
@@ -127,13 +134,18 @@ object FreezyLog {
         return fields.stream().filter { o -> o.name == name }.findFirst().get()
     }
 
+    fun logException(exception: Exception) {
+        exception.printStackTrace(exceptionPrintWriter)
+        exceptionsField.updateTag("\"${exceptionStringWriter}\"")
+    }
+
     fun log() {
         pollFields()
 
         try {
             var csvOut = ""
             if (filesDirty) {
-                logFile.delete()
+                logFile.writeText("")
                 csvOut += csvHeader + "\n"
 
                 metaFile.writeText(gson.toJson(fields))
@@ -141,10 +153,10 @@ object FreezyLog {
                 filesDirty = false
             }
 
-            csvOut += if (collectedFields.replace(",".toRegex(), "").isNotEmpty()) collectedFields else ""
-
+            val csv = collectedFields
+            csvOut += if (csv.isNotEmpty()) "$csv\n" else ""
             if (csvOut.isNotEmpty()) {
-                logFile.writeText(csvOut + "\n")
+                logFile.appendText("$csvOut")
             }
         } catch (e: IOException) {
             System.err.println(e.message)

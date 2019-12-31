@@ -19,9 +19,15 @@
     "type": "class kotlin.String"
   },
   {
+    "name": "TaggedField",
+    "symbol": "m/s²",
+    "unit": "METERS_PER_SECOND_SQUARED",
+    "type": "class kotlin.Int"
+  },
+  {
     "name": "SubscribedField",
     "symbol": "°",
     "unit": "DEGREES",
-    "type": "class kotlin.String"
+    "type": "class kotlin.Int"
   }
 ]

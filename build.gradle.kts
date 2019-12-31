@@ -26,7 +26,7 @@ dependencies {
 
     implementation("com.google.guava:guava:28.2-jre")
     implementation("com.google.code.gson:gson:2.8.6")
-    wpi.deps.wpilib().forEach { compile(it) }
+    wpi.deps.wpilib().forEach { implementation(it) }
 
     testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
 }
