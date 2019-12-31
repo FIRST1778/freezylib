@@ -45,15 +45,11 @@ object FreezyLog {
         )
 
     private val collectedFields: String
-        get() {
-            val out = fields.stream().filter { it::class != MetaField::class }.map { o -> o.value }.collect(
-                Collectors.joining(
-                    ","
-                )
+        get() = fields.stream().filter { it::class != MetaField::class }.map { o -> o.value }.collect(
+            Collectors.joining(
+                ","
             )
-            fields.stream().filter { o -> o is TaggedField }.map { o -> o as TaggedField }.forEach { it.acknowledgeTag() }
-            return out
-        }
+        )
 
     fun setPath(path: String) {
         pathToLogDirectory = path
@@ -153,11 +149,11 @@ object FreezyLog {
                 filesDirty = false
             }
 
-            val csv = collectedFields
-            csvOut += if (csv.isNotEmpty()) "$csv\n" else ""
+            csvOut += if (collectedFields.replace(",", "").isNotEmpty()) "$collectedFields\n" else ""
             if (csvOut.isNotEmpty()) {
                 logFile.appendText("$csvOut")
             }
+            fields.stream().filter { o -> o is TaggedField }.map { o -> o as TaggedField }.forEach { it.acknowledgeTag() }
         } catch (e: IOException) {
             System.err.println(e.message)
         }
